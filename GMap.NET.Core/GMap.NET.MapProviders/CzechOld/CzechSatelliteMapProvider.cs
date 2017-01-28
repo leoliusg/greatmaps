@@ -6,22 +6,22 @@ namespace GMap.NET.MapProviders
    /// <summary>
    /// CzechSatelliteMap provider, http://www.mapy.cz/
    /// </summary>
-   public class CzechSatelliteMapProvider : CzechMapProviderBase
+   public class CzechSatelliteMapProviderOld : CzechMapProviderBaseOld
    {
-      public static readonly CzechSatelliteMapProvider Instance;
+      public static readonly CzechSatelliteMapProviderOld Instance;
 
-      CzechSatelliteMapProvider()
+      CzechSatelliteMapProviderOld()
       {
       }
 
-      static CzechSatelliteMapProvider()
+      static CzechSatelliteMapProviderOld()
       {
-         Instance = new CzechSatelliteMapProvider();
+         Instance = new CzechSatelliteMapProviderOld();
       }
 
       #region GMapProvider Members
 
-      readonly Guid id = new Guid("30F433DB-BBF5-463D-9AB5-76383483B605");
+      readonly Guid id = new Guid("7846D655-5F9C-4042-8652-60B6BF629C3C");
       public override Guid Id
       {
          get
@@ -30,7 +30,7 @@ namespace GMap.NET.MapProviders
          }
       }
 
-      readonly string name = "CzechSatelliteMap";
+      readonly string name = "CzechSatelliteOldMap";
       public override string Name
       {
          get
@@ -50,11 +50,14 @@ namespace GMap.NET.MapProviders
 
       string MakeTileImageUrl(GPoint pos, int zoom, string language)
       {
-         // http://m3.mapserver.mapy.cz/ophoto-m/14-8802-5528
+         //http://m3.mapserver.mapy.cz/ophoto/9_7a80000_7a80000
 
-         return string.Format(UrlFormat, GetServerNum(pos, 3) + 1, zoom, pos.X, pos.Y);
+         long xx = pos.X << (28 - zoom);
+         long yy = ((((long)Math.Pow(2.0, (double)zoom)) - 1) - pos.Y) << (28 - zoom);
+
+         return string.Format(UrlFormat, GetServerNum(pos, 3) + 1, zoom, xx, yy);
       }
 
-      static readonly string UrlFormat = "http://m{0}.mapserver.mapy.cz/ophoto-m/{1}-{2}-{3}";
+      static readonly string UrlFormat = "http://m{0}.mapserver.mapy.cz/ophoto/{1}_{2:x7}_{3:x7}";
    }
 }

@@ -4,25 +4,24 @@ namespace GMap.NET.MapProviders
    using System;
 
    /// <summary>
-   /// CzechHistoryMap provider, http://www.mapy.cz/
+   /// CzechHybridMap provider, http://www.mapy.cz/
    /// </summary>
-   public class CzechHistoryMapProvider : CzechMapProviderBase
+   public class CzechHybridMapProviderOld : CzechMapProviderBaseOld
    {
-      public static readonly CzechHistoryMapProvider Instance;
+      public static readonly CzechHybridMapProviderOld Instance;
 
-      CzechHistoryMapProvider()
+      CzechHybridMapProviderOld()
       {
-         MaxZoom = 15;
       }
 
-      static CzechHistoryMapProvider()
+      static CzechHybridMapProviderOld()
       {
-         Instance = new CzechHistoryMapProvider();
+         Instance = new CzechHybridMapProviderOld();
       }
 
       #region GMapProvider Members
 
-      readonly Guid id = new Guid("CD44C19D-5EED-4623-B367-FB39FDC55B8F");
+      readonly Guid id = new Guid("F785D98E-DD1D-46FD-8BC1-1AAB69604980");
       public override Guid Id
       {
          get
@@ -31,7 +30,7 @@ namespace GMap.NET.MapProviders
          }
       }
 
-      readonly string name = "CzechHistoryMap";
+      readonly string name = "CzechHybridOldMap";
       public override string Name
       {
          get
@@ -47,7 +46,7 @@ namespace GMap.NET.MapProviders
          {
             if(overlays == null)
             {
-               overlays = new GMapProvider[] { this, CzechHybridMapProvider.Instance };
+               overlays = new GMapProvider[] { CzechSatelliteMapProviderOld.Instance, this };
             }
             return overlays;
          }
@@ -64,11 +63,14 @@ namespace GMap.NET.MapProviders
 
       string MakeTileImageUrl(GPoint pos, int zoom, string language)
       {
-         // http://m3.mapserver.mapy.cz/army2-m/14-8802-5528
+         // http://m2.mapserver.mapy.cz/hybrid/9_7d00000_7b80000
 
-         return string.Format(UrlFormat, GetServerNum(pos, 3) + 1, zoom, pos.X, pos.Y);
+         long xx = pos.X << (28 - zoom);
+         long yy = ((((long)Math.Pow(2.0, (double)zoom)) - 1) - pos.Y) << (28 - zoom);
+
+         return string.Format(UrlFormat, GetServerNum(pos, 3) + 1, zoom, xx, yy);
       }
 
-      static readonly string UrlFormat = "http://m{0}.mapserver.mapy.cz/army2-m/{1}-{2}-{3}";
+      static readonly string UrlFormat = "http://m{0}.mapserver.mapy.cz/hybrid/{1}_{2:x7}_{3:x7}";
    }
 }

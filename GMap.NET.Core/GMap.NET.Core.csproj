@@ -10,7 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GMap.NET</RootNamespace>
     <AssemblyName>GMap.NET.Core</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>sn.snk</AssemblyOriginatorKeyFile>
@@ -43,6 +42,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;MONO_disabled; MySQL_disabled; PostgreSQL_disabled; SQLite</DefineConstants>
@@ -60,6 +60,7 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE;MONO_disabled; MySQL_disabled; PostgreSQL_disabled; SQLite</DefineConstants>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -86,6 +87,29 @@
     <BaseAddress>4194304</BaseAddress>
     <RegisterForComInterop>False</RegisterForComInterop>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'v4.0-Debug|AnyCPU'">
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\v4.0-Debug\</OutputPath>
+    <DefineConstants>NET40;TRACE;DEBUG;SQLite;MONO_disabled;MySQL_disabled;PostgreSQL_disabled</DefineConstants>
+    <DebugType>Full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'v4.0-Release|AnyCPU'">
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OutputPath>bin\v4.0-Release\</OutputPath>
+    <DefineConstants>NET40;TRACE;SQLite;MONO_disabled;MySQL_disabled;PostgreSQL_disabled</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFrameworkVersion)' == 'v2.0' ">
     <TargetFrameworkVersionNumber>2.0</TargetFrameworkVersionNumber>
   </PropertyGroup>
@@ -101,8 +125,8 @@
   <PropertyGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.5' ">
     <TargetFrameworkVersionNumber>4.5</TargetFrameworkVersionNumber>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.5.1' ">
-    <TargetFrameworkVersionNumber>4.51</TargetFrameworkVersionNumber>
+  <PropertyGroup Condition=" '$(TargetFrameworkVersion)' == 'v4.6' ">
+    <TargetFrameworkVersionNumber>4.6</TargetFrameworkVersionNumber>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFrameworkVersion)' == 'v5.0' ">
     <TargetFrameworkVersionNumber>5.0</TargetFrameworkVersionNumber>
@@ -202,13 +226,21 @@
     <Compile Include="GMap.NET.MapProviders\ArcGIS\ArcGIS_World_Street_MapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\ArcGIS\ArcGIS_World_Terrain_Base_MapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\ArcGIS\ArcGIS_World_Topo_MapProvider.cs" />
-    <Compile Include="GMap.NET.MapProviders\Etc\CloudMadeMapProvider.cs" />
-    <Compile Include="GMap.NET.MapProviders\Etc\WikiMapiaMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\Czech\CzechGeographicMapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\Czech\CzechHistoryMapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\Czech\CzechHybridMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\Czech\CzechMapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\Czech\CzechSatelliteMapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\Czech\CzechTuristMapProvider.cs" />
-    <Compile Include="GMap.NET.MapProviders\Czech\CzechMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\Czech\CzechTuristWinterMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\Etc\CloudMadeMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\Etc\SwedenMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\Etc\WikiMapiaMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\CzechOld\CzechHistoryMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\CzechOld\CzechHybridMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\CzechOld\CzechSatelliteMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\CzechOld\CzechTuristMapProvider.cs" />
+    <Compile Include="GMap.NET.MapProviders\CzechOld\CzechMapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\Etc\TurkeyMapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\Etc\MapBenderWMSProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\Etc\SpainMapProvider.cs" />
@@ -258,6 +290,7 @@
     <Compile Include="GMap.NET.MapProviders\OpenStreetMap\OpenStreetOsmProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\OpenStreetMap\OpenStreetMapProvider.cs" />
     <Compile Include="GMap.NET.MapProviders\GMapProvider.cs" />
+    <Compile Include="GMap.NET.Projections\SWEREF99_TMProjection.cs" />
     <Compile Include="GMap.NET.Projections\MapsLTReliefProjection.cs" />
     <Compile Include="GMap.NET.Projections\PlateCarreeProjectionDarbAe.cs" />
     <Compile Include="GMap.NET\GDirections.cs" />
